@@ -1,0 +1,40 @@
+#!/bin/bash
+
+clear
+echo "Skrypt sprawdzjacy czy podany wyraz jest palindromem"
+echo "Podaj słowo do sprawdzenia"
+read slowo
+
+if [ "$slowo" ]
+then
+        echo "Podane słowo to $slowo"
+else
+        clear
+        echo "Nie wprowadziłeś słowa! Spróbuj jeszcze raz"
+fi
+
+dlugosc=${#slowo}
+i=0
+
+while [ $i -lt $dlugosc ]
+do
+        tab[$i]=${slowo:i:1}
+        i=$[i+1]
+done
+
+j=$[dlugosc-1]
+
+for (( i=0; $i < $j; i++ ))
+do      
+        if [ ${tab[i]} != ${tab[j]} ] ; then
+		break
+        fi
+        j=$[j-1]
+done
+
+if [ $i -lt $j ]
+then
+	echo "Wyraz $slowo nie jest palidromem"
+else
+        echo "Wyraz $slowo jest palindromem"
+fi

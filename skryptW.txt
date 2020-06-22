@@ -1,0 +1,58 @@
+@echo off
+:STRT
+echo SKRYPT SLUZACY DO PRZESZUKIWANIA W ZADANEJ LOKALIZACJI PLIKOW O WYBRANYM ROZSZERZENIU
+echo -------------------------------------------------------------------------------------
+set /p "SCIEZKA=PODAJ SCIEZKE: "
+if not exist "%SCIEZKA%" (
+	cls
+	goto STRT
+    )
+:RZS
+echo -------------------------------------------------------------------------------------
+echo WYBIERZ POSZUKIWANE ROZSZERZENIE PLIKU WYBIERAJAC NUMER OD 1 DO 5 Z MENU
+echo 1 - *.doc
+echo 2 - *.txt
+echo 3 - *.xls
+echo 4 - *.jpg
+echo 5 - *.pptx
+echo -------------------------------------------------------------------------------------
+set /p "ROZSZERZENIE=PODAJ ROZSZERZENIE: "
+if "%ROZSZERZENIE%"==" " ( 
+    echo NIE WYBRANO ROZSZERZENIA!
+    goto RZS
+)
+if "%ROZSZERZENIE%"=="1" goto DOC
+if "%ROZSZERZENIE%"=="2" goto TXT
+if "%ROZSZERZENIE%"=="3" goto XLS
+if "%ROZSZERZENIE%"=="4" goto JPG
+if "%ROZSZERZENIE%"=="5" goto PPTX
+cls
+echo PRZEKROCZONO DOPUSZCZALNY ZAKRES
+goto RZS
+
+:DOC
+for /R "%SCIEZKA%" %%G in (*.doc) do echo "%%G"
+goto END
+
+:TXT
+for /R "%SCIEZKA%" %%G in (*.txt) do echo "%%G"
+goto END
+
+:XLS
+for /R "%SCIEZKA%" %%G in (*.xls) do echo "%%G"
+goto END
+
+:JPG
+for /R "%SCIEZKA%" %%G in (*.jpg) do echo "%%G"
+goto END
+
+:PPTX
+for /R "%SCIEZKA%" %%G in (*.pptx) do echo "%%G"
+goto END
+
+:BRAK_S
+echo BRAK SCIEŻKI! SPRÓBUJ JESZCZE RAZ
+goto STRT
+
+:END
+set /p enterrr=
